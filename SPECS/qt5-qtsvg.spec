@@ -5,7 +5,7 @@
 Summary: Qt5 - Support for rendering and displaying SVG
 Name:    qt5-%{qt_module}
 Version: 5.15.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # See LGPL_EXCEPTIONS.txt, LICENSE.GPL3, respectively, for exception details
 License: LGPLv2 with exceptions or GPLv3 with exceptions
@@ -16,7 +16,7 @@ Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submod
 # upstream fix
 Patch0: qtsvg-5.15.2-clamp-parsed-doubles-to-float-representtable-values.patch
 Patch1: qtsvg-5.15.2-do-strict-error-checking-when-parsing-path-nodes.patch
-
+Patch2: qtsvg-CVE-2023-32573.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: pkgconfig(zlib)
@@ -124,6 +124,10 @@ popd
 
 
 %changelog
+* Thu May 18 2023 Jan Grulich <jgrulich@redhat.com> - 5.15.3-2
+- Fix uninitialized variable usage in m_unitsPerEm (CVE-2023-32573)
+  Resolves: bz#2208141
+
 * Mon Mar 28 2022 Jan Grulich <jgrulich@redhat.com> - 5.15.3-1
 - 5.15.3
   Resolves: bz#2061405
